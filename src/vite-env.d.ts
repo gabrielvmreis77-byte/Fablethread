@@ -2,7 +2,7 @@
 
 declare global {
   interface Window {
-    noDeTinta?: {
+    fablethread?: {
       load: () => Promise<unknown>
       save: (data: unknown) => Promise<boolean>
       exportBook: (payload: { title: string; markdown: string }) => Promise<string | null>

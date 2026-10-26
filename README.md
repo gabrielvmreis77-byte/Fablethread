@@ -1,29 +1,31 @@
-# Nó de Tinta
+# Fablethread
 
-Um estúdio desktop local para escrever e planejar livros. Inspirado no que as pessoas mais valorizam em ferramentas de notas conectadas — propriedade dos dados, links e visão visual — sem exigir plugins ou uma configuração longa antes de começar.
+**Your stories, connected.** Fablethread is a Windows writing studio for books. Draft chapters, shape the outline, and keep characters, places, and ideas connected in one quiet workspace.
 
-## O que já funciona
+![Fablethread app icon](public/brand.png)
 
-- Editor de capítulos com salvamento automático local
-- Metas de palavras por capítulo e por livro
-- Planejamento em quadro por etapa: ideia, rascunho, revisão e pronto
-- Mapa visual de personagens, lugares, temas, objetos e eventos
-- Criação de conexões no mapa em dois cliques
-- Busca em título, resumo e conteúdo
-- Modo foco para escrita sem distrações
-- Exportação do manuscrito completo em Markdown
-- Aplicativo Windows instalável e versão portátil
+## Features
 
-## Rodar localmente
+- Distraction-free chapter editor with automatic local saving
+- Book and chapter word targets
+- Four-stage outline: Idea, Draft, Revision, Done
+- Visual story map with editable nodes and connections
+- Search across chapter titles, summaries, and text
+- Focus mode and full-manuscript Markdown export
+- Windows installer and portable edition
 
-Requer Node.js 20 ou mais recente.
+The app works offline and requires no account. It stores the library in the local application data folder. Existing libraries from the earlier **Nó de Tinta** build are read on first launch and copied into Fablethread's own data folder when saved; the original remains intact. The text you wrote is kept in its original language.
+
+## Run from source
+
+Requires Node.js 20 or later.
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Testar e empacotar
+## Verify and package
 
 ```bash
 npm test
@@ -31,20 +33,12 @@ npm run build
 npm run dist
 ```
 
-Os instaladores são criados em `release/`.
+Windows packages are written to `release/`. This preview release is unsigned.
 
-## Privacidade
+## Product decisions
 
-Seus livros ficam no computador, na pasta de dados do aplicativo. O Nó de Tinta não exige conta e não envia o manuscrito a nenhum serviço. Ao exportar, você escolhe onde salvar uma cópia `.md`.
+The app keeps the local ownership, links, and visual planning people praise in Obsidian while giving book writers a ready-made manuscript and outline. The [research notes](docs/obsidian-research.md) summarize the source feedback.
 
-## Princípios do produto
-
-1. Escrever vem antes de configurar.
-2. A estrutura de um livro deve existir desde o primeiro uso.
-3. Conexões visuais precisam ajudar a história, não virar decoração.
-4. O autor deve manter a posse e a portabilidade do texto.
-5. Recursos essenciais não podem depender de uma coleção de plugins.
-
-## Licença
+## License
 
 MIT

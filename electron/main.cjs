@@ -3,12 +3,19 @@ const path = require('path')
 const fs = require('fs/promises')
 
 const isDev = !app.isPackaged
-const dataFile = () => path.join(app.getPath('userData'), 'biblioteca.json')
+const dataFile = () => path.join(app.getPath('userData'), 'library.json')
+const legacyDataFile = () => path.join(app.getPath('appData'), 'no-de-tinta', 'biblioteca.json')
 
 async function readLibrary() {
   try { return JSON.parse(await fs.readFile(dataFile(), 'utf8')) }
   catch (error) {
-    if (error.code === 'ENOENT') return null
+    if (error.code === 'ENOENT') {
+      try { return JSON.parse(await fs.readFile(legacyDataFile(), 'utf8')) }
+      catch (legacyError) {
+        if (legacyError.code === 'ENOENT') return null
+        throw legacyError
+      }
+    }
     throw error
   }
 }
@@ -25,7 +32,7 @@ async function writeLibrary(data) {
 function createWindow() {
   const win = new BrowserWindow({
     width: 1440, height: 920, minWidth: 1060, minHeight: 680,
-    backgroundColor: '#f6f0e7', title: 'Nó de Tinta',
+    backgroundColor: '#f6f0e7', title: 'Fablethread',
     icon: path.join(__dirname, '..', 'public', 'brand.png'),
     titleBarStyle: 'hidden', titleBarOverlay: { color: '#17253d', symbolColor: '#f6f0e7', height: 38 },
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true }
@@ -37,7 +44,7 @@ function createWindow() {
 ipcMain.handle('library:load', readLibrary)
 ipcMain.handle('library:save', (_, data) => writeLibrary(data))
 ipcMain.handle('book:export', async (_, { title, markdown }) => {
-  const result = await dialog.showSaveDialog({ title: 'Exportar manuscrito', defaultPath: `${title.replace(/[<>:"/\\|?*]/g, '-')}.md`, filters: [{ name: 'Markdown', extensions: ['md'] }, { name: 'Texto', extensions: ['txt'] }] })
+  const result = await dialog.showSaveDialog({ title: 'Export manuscript', defaultPath: `${title.replace(/[<>:"/\\|?*]/g, '-')}.md`, filters: [{ name: 'Markdown', extensions: ['md'] }, { name: 'Text', extensions: ['txt'] }] })
   if (result.canceled || !result.filePath) return null
   await fs.writeFile(result.filePath, markdown, 'utf8')
   shell.showItemInFolder(result.filePath)

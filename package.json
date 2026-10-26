@@ -1,8 +1,8 @@
 {
-  "name": "no-de-tinta",
-  "version": "0.1.0",
+  "name": "fablethread",
+  "version": "0.2.0",
   "private": true,
-  "description": "Estúdio local para escrever e planejar livros.",
+  "description": "A local writing studio for connected stories.",
   "author": "Gabriel",
   "main": "electron/main.cjs",
   "type": "module",
@@ -33,8 +33,8 @@
     "wait-on": "latest"
   },
   "build": {
-    "appId": "com.nodetinta.app",
-    "productName": "Nó de Tinta",
+    "appId": "com.fablethread.studio",
+    "productName": "Fablethread",
     "directories": {
       "output": "release"
     },
@@ -46,7 +46,7 @@
     ],
     "win": {
       "icon": "public/app.ico",
-      "artifactName": "No-de-Tinta-${version}-${arch}.${ext}"
+      "artifactName": "Fablethread-Setup-${version}-${arch}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -54,7 +54,7 @@
       "createDesktopShortcut": true
     },
     "portable": {
-      "artifactName": "No-de-Tinta-Portable-${version}.${ext}"
+      "artifactName": "Fablethread-Portable-${version}.${ext}"
     }
   }
 }
