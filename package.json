@@ -1,0 +1,60 @@
+{
+  "name": "no-de-tinta",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Estúdio local para escrever e planejar livros.",
+  "author": "Gabriel",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "node scripts/make-icon.mjs && tsc -b && vite build",
+    "test": "vitest run",
+    "dist": "npm run build && electron-builder --win nsis portable"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.5",
+    "typescript": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "wait-on": "latest"
+  },
+  "build": {
+    "appId": "com.nodetinta.app",
+    "productName": "Nó de Tinta",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json",
+      "public/brand.png"
+    ],
+    "win": {
+      "icon": "public/app.ico",
+      "artifactName": "No-de-Tinta-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "portable": {
+      "artifactName": "No-de-Tinta-Portable-${version}.${ext}"
+    }
+  }
+}
